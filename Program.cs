@@ -24,6 +24,27 @@ if (!string.IsNullOrEmpty(feedback))
     Console.WriteLine($"Positive Score: {sentiment.ConfidenceScores.Positive}");
     Console.WriteLine($"Neutral Score: {sentiment.ConfidenceScores.Neutral}");
     Console.WriteLine($"Negative Score: {sentiment.ConfidenceScores.Negative}");
+
+    if (sentiment.ConfidenceScores.Positive > 0.75)
+    {
+        Console.WriteLine("Thank you for your positive feedback!");
+        Console.WriteLine($"Feedback: {feedback}");
+    }
+    else if (sentiment.ConfidenceScores.Negative > 0.75)
+    {
+        Console.WriteLine("ALERT: Negative feedback detected. Notifying support team...");
+        NotifySupportTeam(feedback);
+    }
+    else
+    {
+        Console.WriteLine("Feedback is neutral or mixed.");
+        Console.WriteLine($"Feedback: {feedback}");
+    }
+
+    static void NotifySupportTeam(string feedback)
+    {
+        Console.WriteLine($"Support team notified with the following feedback: {feedback}");
+    }
 }
 else
 {
